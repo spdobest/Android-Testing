@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/account_navigation"
+    app:startDestination="@id/onBoardingTestFragment">
+
+    <fragment
+        android:id="@+id/onBoardingTestFragment"
+        android:name="com.spm.androidtesting.account.OnboardingTestFragment"
+        android:label="OnboardingTestFragment"
+        tools:layout="@layout/fragment_onboarding_test">
+        <action
+            android:id="@+id/action_homeTestFragment_to_registerTestFragment2"
+            app:destination="@id/registerTestFragment" />
+        <action
+            android:id="@+id/action_homeTestFragment_to_loginTestFragment"
+            app:destination="@id/loginTestFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginTestFragment"
+        android:name="com.spm.androidtesting.account.LoginTestFragment"
+        android:label="LoginTestFragment">
+        <action
+            android:id="@+id/action_loginTestFragment_to_registerTestFragment"
+            app:destination="@id/registerTestFragment" />
+        <action
+            android:id="@+id/action_loginTestFragment_to_homeTestFragment"
+            app:destination="@id/homeTestFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerTestFragment"
+        android:name="com.spm.androidtesting.account.RegisterTestFragment"
+        android:label="RegisterTestFragment">
+        <action
+            android:id="@+id/action_registerTestFragment_to_loginTestFragment"
+            app:destination="@id/loginTestFragment" />
+        <action
+            android:id="@+id/action_registerTestFragment_to_homeTestFragment"
+            app:destination="@id/homeTestFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeTestFragment"
+        android:name="com.spm.androidtesting.account.HomeTestFragment"
+        android:label="HomeTestFragment">
+        <argument
+            android:name="userid"
+            app:argType="string" />
+    </fragment>
+
+</navigation>
