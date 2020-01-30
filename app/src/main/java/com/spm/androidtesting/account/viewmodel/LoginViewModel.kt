@@ -9,6 +9,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
+import com.spm.androidtesting.utils.CommonUtils
+
 
 class LoginViewModel : ViewModel(), LifecycleObserver,Observable {
 
@@ -25,13 +27,33 @@ class LoginViewModel : ViewModel(), LifecycleObserver,Observable {
 
     var progressVisibility: ObservableBoolean = ObservableBoolean()
 
-    @Bindable
-    var email = ObservableField<String>()
+    var email = ""
+
+    var password = ""
+
+    @InverseBindingAdapter(attribute = "app:errorEmail")
+    fun getError(view: AppCompatEditText) : String {
+        return ""
+    }
 
     @Bindable
-    var password = ObservableField<String>()
+    fun getEmailString() = email
 
-    var error = ObservableField<String>()
+    fun setEmailString(email : String){
+        this.email = email
+    }
+
+    @Bindable
+    fun getPasswordString() = password
+
+    fun setPasswordString(email : String){
+        this.password = email
+    }
+
+
+
+    var errorEmail = ObservableField<String>()
+    var errorPassword = ObservableField<String>()
 
 
     fun onLoginClicked(view: View) {
@@ -42,6 +64,29 @@ class LoginViewModel : ViewModel(), LifecycleObserver,Observable {
         }, 3000)
     }
 
+
+    fun onTextChangedEmail(
+        s: CharSequence,
+        start: Int,
+        before: Int,
+        count: Int
+    ) {
+        Log.w("tag", "onTextChanged $s")
+
+    }
+
+    fun onTextChangedPassword(
+        s: CharSequence,
+        start: Int,
+        before: Int,
+        count: Int
+    ) {
+        Log.w("tag", "onTextChanged $s")
+        if (password!!.length < 6){
+            errorPassword.set("Password must be ")
+        }
+
+    }
 
     @BindingAdapter("app:error")
     fun onError(edittext: AppCompatEditText, error: String) {
