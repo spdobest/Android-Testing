@@ -25,9 +25,9 @@
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:maxLines="1"
-            android:text="@={viewmodel.getEmailString}"
-            app:error="@{viewmodel.errorEmail}"
+            android:text="@={viewmodel.email}"
             android:onTextChanged="@{viewmodel.onTextChangedEmail}"
+            app:error="@{viewmodel.emailError}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,8 +40,8 @@
             android:hint="Password"
             android:inputType="textPassword"
             android:maxLines="1"
-            android:text="@={viewmodel.getPasswordStr}"
-            app:error="@{viewmodel.errorPassword}"
+            android:text="@={viewmodel.password}"
+            app:error="@{viewmodel.passwordError}"
             android:onTextChanged="@{viewmodel.onTextChangedPassword}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,6 +66,7 @@
             android:text="If dont have account ? Register"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:onClick="@{(view) -> viewmodel.onRegisterClicked(view)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

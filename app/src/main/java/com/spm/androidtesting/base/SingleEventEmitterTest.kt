@@ -8,7 +8,9 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class SingleEventEmitterTest {
+
     private val testLifecycleOwner = TestLifeCycleOwner()
+
     @Test
     fun testInitialState() {
         assertEquals(0, testLifecycleOwner.lifeCycleObserverCount())

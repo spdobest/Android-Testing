@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="book"
+            type="com.spm.androidtesting.model.books.Book" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewBook"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:profileImage="@{book.book_image}"
+            bind:layout_constraintStart_toStartOf="parent"
+            bind:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_launcher_background" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBookTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@{book.title}"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintStart_toEndOf="@+id/imageViewBook"
+            bind:layout_constraintTop_toTopOf="parent"
+            tools:text="Book Name" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBookDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{book.title}"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintHorizontal_bias="0.0"
+            bind:layout_constraintStart_toEndOf="@+id/imageViewBook"
+            bind:layout_constraintTop_toBottomOf="@+id/tvBookTitle"
+            tools:text="Book Name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBookAuther"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:ellipsize="end"
+            android:text="@{book.author}"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintHorizontal_bias="0.0"
+            bind:layout_constraintStart_toEndOf="@+id/imageViewBook"
+            bind:layout_constraintTop_toBottomOf="@+id/tvBookDesc"
+            tools:text="Book Name" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBookPublisher"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:ellipsize="end"
+            android:text="@{book.publisher}"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintHorizontal_bias="0.0"
+            bind:layout_constraintStart_toEndOf="@+id/imageViewBook"
+            bind:layout_constraintTop_toBottomOf="@+id/tvBookAuther"
+            tools:text="Book Name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

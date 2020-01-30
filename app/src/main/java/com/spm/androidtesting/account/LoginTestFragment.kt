@@ -7,26 +7,36 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.spm.androidtesting.R
 import com.spm.androidtesting.account.viewmodel.LoginViewModel
 import com.spm.androidtesting.databinding.FragmentLoginTestBinding
+import com.spm.androidtesting.utils.ExamplePreferences
 import kotlinx.android.synthetic.main.fragment_login_test.*
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.dsl.module
+
+val loginFragmentModule = module {
+    factory { LoginTestFragment() }
+}
 
 class LoginTestFragment : Fragment() {
 
 
-    val loginViewModel: LoginViewModel by lazy {
-        ViewModelProvider(this).get(LoginViewModel::class.java)
-    }
+    private val preferences: ExamplePreferences by inject()
+
+    private val loginViewModel: LoginViewModel by viewModel()
+
+    /* val loginViewModel: LoginViewModel by lazy {
+         ViewModelProvider(this).get(LoginViewModel::class.java)
+     }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
 
         }
-
     }
 
     override fun onCreateView(
@@ -45,12 +55,12 @@ class LoginTestFragment : Fragment() {
                 false
             )
 
+        loginViewModel.setFragmentContext(this)
         binding.viewmodel = loginViewModel
 
         lifecycle.addObserver(loginViewModel)
 
         return binding.root
-
     }
 
 
@@ -78,10 +88,7 @@ class LoginTestFragment : Fragment() {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             LoginTestFragment().apply {
-                arguments = Bundle().apply {
-
-                }
+                arguments = Bundle().apply {}
             }
     }
-
 }

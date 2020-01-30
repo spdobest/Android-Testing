@@ -3,4 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_word">Hello blank fragment</string>
+    <!--    https://developer.nytimes.com/my-apps/7b881122-5376-4af6-bbd6-9d0a7a8dbe53-->
+    <string name="any_api_sites">https://any-api.com/</string>
+    <string name="api_key">y5nWAAK3Ou4OgGu5VZy4rhrQi4TTeluR</string>
 </resources>

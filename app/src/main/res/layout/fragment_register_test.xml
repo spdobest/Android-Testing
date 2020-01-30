@@ -5,9 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewmodel"
-            type="com.spm.androidtesting.account.viewmodel.LoginViewModel" />
+            type="com.spm.androidtesting.account.viewmodel.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,6 +25,8 @@
             android:hint="Name"
             android:inputType="text"
             android:maxLines="1"
+            android:text="@={viewmodel.name}"
+            app:error="@{viewmodel.nameError}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,6 +38,8 @@
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:maxLines="1"
+            android:text="@={viewmodel.email}"
+            app:error="@{viewmodel.emailError}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etName" />
@@ -43,9 +49,14 @@
             android:id="@+id/etMobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:digits="0123456789"
             android:hint="Mobile"
             android:inputType="numberDecimal"
+            android:maxEms="10"
             android:maxLines="1"
+            android:minEms="10"
+            android:text="@={viewmodel.mobile}"
+            app:error="@{viewmodel.mobileError}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etEmail" />
@@ -58,6 +69,8 @@
             android:hint="Password"
             android:inputType="textPassword"
             android:maxLines="1"
+            android:text="@={viewmodel.password}"
+            app:error="@{viewmodel.passwordError}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etMobile" />
@@ -67,6 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:onClick="@{(view) -> viewmodel.onRegisterClicked(view)}"
             android:text="Register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,12 +92,27 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{(view) -> viewmodel.onLoginClicked(view)}"
             android:text="If already registered ? Login"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:visibility="@{viewmodel.progressVisibility ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
