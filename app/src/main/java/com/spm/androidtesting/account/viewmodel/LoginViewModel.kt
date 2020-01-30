@@ -3,8 +3,10 @@ package com.spm.androidtesting.account.viewmodel
 import android.os.Handler
 import android.util.Log
 import android.view.View
-import androidx.appcompat.widget.AppCompatEditText
-import androidx.databinding.*
+import androidx.databinding.Bindable
+import androidx.databinding.Observable
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
@@ -44,9 +46,9 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     var passwordStr = ObservableField<String>()
 
 
-    var emailError = ObservableField<String>()
+    var emailError = ObservableField<String>("")
 
-    var passwordError = ObservableField<String>()
+    var passwordError = ObservableField<String>("")
 
     var email: String = ""
     var password: String = ""
@@ -108,16 +110,6 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     ) {
         Log.w("tag", "onTextChanged $s")
     }
-
-    @BindingAdapter("app:error")
-    fun onError(edittext: AppCompatEditText, error: String) {
-        edittext.error = error
-    }
-
-    /* @BindingAdapter("app:focusChange")
-     fun onFocusChange(edittext: AppCompatEditText) {
-         edittext.onFocusChangeListener
-     }*/
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun getData() {

@@ -1,5 +1,12 @@
 package com.spm.androidtesting.account.viewmodel
 
+
+/**
+ * Created by Sibaprasad Mohanty on 2020-01-30.
+ * Spm Limited
+ * sp.dobest@gmail.com
+ */
+
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import com.spm.androidtesting.R
@@ -15,7 +22,7 @@ import org.mockito.Mockito.`when`
 
 private const val FAKE_STRING = "HELLO WORLD"
 
-class LoginViewmodelTest {
+class RegisterViewModelTest {
 
     val context = ApplicationProvider.getApplicationContext<Context>()
 
@@ -25,7 +32,7 @@ class LoginViewmodelTest {
     }
 
     @After
-    fun setUpAfter(){
+    fun setUpAfter() {
 
     }
 
@@ -57,19 +64,19 @@ class LoginViewmodelTest {
         // Given a mocked Context injected into the object under test...
         `when`(mockContext.getString(R.string.hello_word))
             .thenReturn(FAKE_STRING)
-    //    val myObjectUnderTest = ClassUnderTest(mockContext)
+        //    val myObjectUnderTest = ClassUnderTest(mockContext)
 
         // ...when the string is returned from the object under test...
         val result: String = ""// myObjectUnderTest.getHelloWorldString()
 
         // ...then the result should be the expected one.
-       // assertThat(result, `is`(FAKE_STRING))
+        // assertThat(result, `is`(FAKE_STRING))
     }
 
     @Test
-    fun checkValidEmail(){
+    fun checkValidEmail() {
         val email = "s@s.com"
-        Assert.assertEquals(4,2+2)
+        Assert.assertEquals(4, 2 + 2)
     }
 
 }

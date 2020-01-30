@@ -1,7 +1,9 @@
 package com.spm.androidtesting.model.books
 
 import android.os.Parcelable
+import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import androidx.databinding.library.baseAdapters.BR
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -31,5 +33,15 @@ data class Book(
     val rank_last_week: Int,
     val sunday_review_link: String,
     val title: String,
-    val weeks_on_list: Int
-) : Parcelable
+    val weeks_on_list: Int,
+    @Bindable
+    var favorite: Boolean
+) : BaseObservable(), Parcelable {
+
+
+    fun changeFavorite() {
+        this.favorite = !favorite
+        notifyPropertyChanged(BR.favorite)
+    }
+
+}

@@ -1,36 +1,44 @@
 package com.spm.androidtesting.utils
 
+import android.graphics.drawable.Drawable
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.spm.androidtesting.adapter.BooksAdapter
-import com.spm.androidtesting.model.books.Book
+import com.spm.androidtesting.R
 
 
-class BindingUtils {
-    // important code for loading image here
-//    @BindingAdapter("bind:imageUrl")
+object BindingUtils {
 
 
-    @BindingAdapter("bind:imageUrl")
-    fun loadImage1(view: AppCompatImageView, url: String) {
-        Glide.with(view.context)
-            .load(url).apply(RequestOptions().circleCrop())
-            .into(view)
+    @JvmStatic
+    @BindingAdapter("android:src")
+    fun setImageUrl(view: AppCompatImageView, isEnable: Boolean) {
+        var resourceId =
+            if (isEnable) view.context.getDrawable(R.drawable.ic_heart_enable) else view.context.getDrawable(
+                R.drawable.ic_heart_disable
+            )
+        view.setImageDrawable(resourceId)
     }
 
+    @JvmStatic
+    @BindingAdapter("android:error")
+    fun onError(edittext: AppCompatEditText, error: String) {
+        edittext.error = error
+    }
 
-    /* @BindingAdapter("app:imageUrl")
-     fun loadImage(view: AppCompatImageView, imageUrl: String) {
-         Glide.with(view.context)
-             .load(imageUrl).apply(RequestOptions().circleCrop())
-             .into(view)
-     }*/
-
-    @BindingAdapter("app:adapter")
-    fun adapter(recyclerView: RecyclerView, listData: ArrayList<Book>) {
-        recyclerView.adapter = BooksAdapter(listData)
+    @BindingAdapter(value = ["imageUrl", "placeholder"], requireAll = false)
+    @JvmStatic
+    fun loadImageInCircle(
+        view: AppCompatImageView,
+        imageUrl: String?,
+        placeholder: Drawable? = null
+    ) {
+        Glide.with(view.context)
+            .load(imageUrl)
+            .apply(RequestOptions.circleCropTransform())
+            .error(placeholder)
+            .into(view)
     }
 }

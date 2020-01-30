@@ -26,10 +26,11 @@
             android:inputType="text"
             android:maxLines="1"
             android:text="@={viewmodel.name}"
-            app:error="@{viewmodel.nameError}"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <!--        app:error="@{viewmodel.nameError}"-->
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etEmail"
@@ -39,11 +40,11 @@
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:text="@={viewmodel.email}"
-            app:error="@{viewmodel.emailError}"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etName" />
-
+        <!--        app:error="@{viewmodel.emailError}"-->
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etMobile"
@@ -56,10 +57,11 @@
             android:maxLines="1"
             android:minEms="10"
             android:text="@={viewmodel.mobile}"
-            app:error="@{viewmodel.mobileError}"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+        <!--        app:error="@{viewmodel.mobileError}"-->
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etPwd"
@@ -70,10 +72,11 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:text="@={viewmodel.password}"
-            app:error="@{viewmodel.passwordError}"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etMobile" />
+        <!--        app:error="@{viewmodel.passwordError}"-->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnRegister"
