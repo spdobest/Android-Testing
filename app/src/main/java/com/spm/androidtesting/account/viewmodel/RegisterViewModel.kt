@@ -16,12 +16,15 @@ import androidx.navigation.fragment.NavHostFragment
 import com.spm.androidtesting.R
 import com.spm.androidtesting.account.repository.RegisterRepository
 import com.spm.androidtesting.utils.CommonUtils
+import org.koin.dsl.module
+
+
+val registerviewModel = module {
+    factory { RegisterViewModel(get()) }
+}
 
 class RegisterViewModel(private val registerRepository: RegisterRepository) : ViewModel(),
     LifecycleObserver, Observable {
-
-
-    lateinit var fragment: Fragment
 
     var progressVisibility: ObservableBoolean = ObservableBoolean()
 
@@ -83,7 +86,7 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
         return mobile
     }
 
-    fun onRegisterClicked(view: View) {
+    fun onRegisterClicked(view: View, fragment: Fragment) {
 
         progressVisibility.set(true)
 
@@ -110,9 +113,6 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
 
     }
 
-    fun onLoginClicked(view: View) {
-        NavHostFragment.findNavController(fragment).navigate(R.id.loginTestFragment, null)
-    }
 
     fun onTextChangedEmail(
         s: CharSequence,
@@ -174,10 +174,5 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
 
     }
-
-    fun setFragmentContext(fragment: Fragment) {
-        this.fragment = fragment
-    }
-
 
 }

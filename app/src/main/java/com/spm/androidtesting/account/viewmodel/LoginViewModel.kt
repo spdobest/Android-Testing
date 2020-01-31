@@ -35,10 +35,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     LiveData has an advantage is that it is lifecycle-aware specific for Android. So, it works closely with LifeCycle components.
      */
 
-    lateinit var fragment: Fragment
-
     var progressVisibility: ObservableBoolean = ObservableBoolean()
-
 
     @Bindable
     var emailStr = ObservableField<String>()
@@ -73,7 +70,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         return password
     }
 
-    fun onLoginClicked(view: View) {
+    fun onLoginClicked(view: View, fragment: Fragment) {
         progressVisibility.set(true)
 
         if (!CommonUtils.isValidEmail(email)) {
@@ -89,10 +86,6 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         Handler().postDelayed({
             progressVisibility.set(false)
         }, 3000)
-    }
-
-    fun onRegisterClicked(view: View) {
-        NavHostFragment.findNavController(fragment).navigate(R.id.registerTestFragment, null)
     }
 
     fun onTextChangedEmail(
@@ -144,10 +137,6 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
 
-    }
-
-    fun setFragmentContext(fragment: Fragment) {
-        this.fragment = fragment
     }
 
 }

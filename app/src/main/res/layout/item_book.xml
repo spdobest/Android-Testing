@@ -123,7 +123,6 @@
                 bind:layout_constraintEnd_toEndOf="@+id/tvBookAuther"
                 />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

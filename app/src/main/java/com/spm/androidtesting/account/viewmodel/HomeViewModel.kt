@@ -1,12 +1,10 @@
 package com.spm.androidtesting.account.viewmodel
 
 import android.util.Log
-import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableBoolean
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.RecyclerView
 import com.spm.androidtesting.account.repository.HomeRepository
 import com.spm.androidtesting.adapter.BooksAdapter
 import com.spm.androidtesting.model.books.Book
@@ -44,16 +42,12 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel(), L
 
     }
 
-    fun setFragmentContext(fragment: Fragment) {
-        this.fragment = fragment
-    }
-
 
     fun getBooks() {
-
         homeRepository.getBooksList().observeForever {
             Log.i("TAG", "value ")
             Log.i("asdas", it?.toString())
+            bookList.clear()
             bookList.addAll(it)
             bookadapter.notifyDataSetChanged()
             progressVisibility.set(false)
@@ -67,10 +61,6 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel(), L
         }
     }
 
-    @BindingAdapter("adapter")
-    fun adapter(recyclerView: RecyclerView, listData: ArrayList<Book>) {
-        recyclerView.adapter = BooksAdapter(listData, this)
-    }
 
     fun cancelRequests() = coroutineContext.cancel()
 }

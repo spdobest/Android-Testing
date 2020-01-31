@@ -1,6 +1,5 @@
 package com.spm.androidtesting.account
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -55,32 +54,23 @@ class LoginTestFragment : Fragment() {
                 false
             )
 
-        loginViewModel.setFragmentContext(this)
         binding.viewmodel = loginViewModel
+        binding.fragment = this
 
         lifecycle.addObserver(loginViewModel)
 
         return binding.root
     }
 
+    fun onRegisterClicked() {
+        NavHostFragment.findNavController(this).navigate(R.id.registerTestFragment, null)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnLogin?.setOnClickListener {
             NavHostFragment.findNavController(this).navigate(R.id.homeTestFragment, null)
         }
-
-        btnRegister?.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.registerTestFragment, null)
-        }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
     }
 
     companion object {

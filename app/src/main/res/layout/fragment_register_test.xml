@@ -10,6 +10,10 @@
         <variable
             name="viewmodel"
             type="com.spm.androidtesting.account.viewmodel.RegisterViewModel" />
+
+        <variable
+            name="fragment"
+            type="com.spm.androidtesting.account.RegisterTestFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -83,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:onClick="@{(view) -> viewmodel.onRegisterClicked(view)}"
+            android:onClick="@{(view) -> viewmodel.onRegisterClicked(view,fragment)}"
             android:text="Register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -95,7 +99,7 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{(view) -> viewmodel.onLoginClicked(view)}"
+            android:onClick="@{() -> fragment.onLoginClicked()}"
             android:text="If already registered ? Login"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"

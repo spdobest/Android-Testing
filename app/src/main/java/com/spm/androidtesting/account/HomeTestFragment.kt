@@ -1,6 +1,5 @@
 package com.spm.androidtesting.account
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,7 +35,6 @@ class HomeTestFragment : Fragment() {
                 false
             )
 
-        homeViewModel.setFragmentContext(this)
         binding.viewmodel = homeViewModel
 
         lifecycle.addObserver(homeViewModel)
@@ -46,14 +44,6 @@ class HomeTestFragment : Fragment() {
         return binding.root
     }
 
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-    }
 
     companion object {
         // TODO: Rename and change types and number of parameters

@@ -5,9 +5,11 @@ import android.text.TextUtils
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.spm.androidtesting.R
+import com.spm.androidtesting.model.books.Book
 
 
 object BindingUtils {
@@ -46,4 +48,10 @@ object BindingUtils {
             .error(placeholder)
             .into(view)
     }
+
+    @BindingAdapter("adapter")
+    fun adapter(recyclerView: RecyclerView, listData: ArrayList<Book>) {
+        //  recyclerView.adapter = BooksAdapter(listData, this)
+    }
+
 }
