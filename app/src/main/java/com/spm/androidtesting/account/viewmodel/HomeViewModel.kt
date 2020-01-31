@@ -17,7 +17,7 @@ import kotlinx.coroutines.cancel
 import kotlin.coroutines.CoroutineContext
 
 class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel(), LifecycleObserver {
-    
+
     //create a new Job
     private val parentJob = Job()
     //create a coroutine context with the job and the dispatcher
@@ -36,7 +36,7 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel(), L
     var bookList = ArrayList<Book>()
 
     val bookadapter: BooksAdapter by lazy {
-        BooksAdapter(bookList)
+        BooksAdapter(bookList, this)
     }
 
     init {
@@ -60,9 +60,16 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel(), L
         }
     }
 
+    fun removeItem(position: Int) {
+        if (bookList.size > 0) {
+            bookList.removeAt(position)
+            bookadapter.notifyItemRemoved(position)
+        }
+    }
+
     @BindingAdapter("adapter")
     fun adapter(recyclerView: RecyclerView, listData: ArrayList<Book>) {
-        recyclerView.adapter = BooksAdapter(listData)
+        recyclerView.adapter = BooksAdapter(listData, this)
     }
 
     fun cancelRequests() = coroutineContext.cancel()

@@ -1,6 +1,7 @@
 package com.spm.androidtesting.utils
 
 import android.graphics.drawable.Drawable
+import android.text.TextUtils
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
@@ -25,7 +26,11 @@ object BindingUtils {
     @JvmStatic
     @BindingAdapter("android:error")
     fun onError(edittext: AppCompatEditText, error: String) {
-        edittext.error = error
+        if (TextUtils.isEmpty(error)) {
+            edittext.error = null
+        } else {
+            edittext.error = error
+        }
     }
 
     @BindingAdapter(value = ["imageUrl", "placeholder"], requireAll = false)

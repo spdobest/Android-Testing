@@ -39,15 +39,17 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     var progressVisibility: ObservableBoolean = ObservableBoolean()
 
+
     @Bindable
     var emailStr = ObservableField<String>()
 
     @Bindable
     var passwordStr = ObservableField<String>()
 
-
+    @Bindable
     var emailError = ObservableField<String>("")
 
+    @Bindable
     var passwordError = ObservableField<String>("")
 
     var email: String = ""

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <import type="android.view.View" />
+
+        <variable
+            name="position"
+            type="Integer" />
+
+        <variable
+            name="viewmodel"
+            type="com.spm.androidtesting.account.viewmodel.HomeViewModel" />
 
         <variable
             name="book"
@@ -97,13 +105,24 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageviewHeart"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:onClick="@{() -> book.changeFavorite()}"
                 android:src="@{book.favorite}"
                 bind:layout_constraintBottom_toBottomOf="parent"
                 bind:layout_constraintEnd_toEndOf="@+id/tvBookAuther"
                 bind:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageviewDelete"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="@{() -> viewmodel.removeItem(position)}"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_delete"
+                bind:layout_constraintEnd_toEndOf="@+id/tvBookAuther"
+                />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

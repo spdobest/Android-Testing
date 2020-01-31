@@ -38,7 +38,6 @@ data class Book(
     var favorite: Boolean
 ) : BaseObservable(), Parcelable {
 
-
     fun changeFavorite() {
         this.favorite = !favorite
         notifyPropertyChanged(BR.favorite)
