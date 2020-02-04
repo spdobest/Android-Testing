@@ -1,22 +1,31 @@
 package com.spm.androidtesting.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.spm.androidtesting.account.viewmodel.HomeViewModel
-import com.spm.androidtesting.adapter.viewholder.BookViewholder
+import com.spm.androidtesting.controller.DeleteListener
 import com.spm.androidtesting.databinding.ItemBookBinding
 import com.spm.androidtesting.model.books.Book
 import com.spm.androidtesting.utils.BookDiffCallback
 
-class BooksAdapter(var listBooks: ArrayList<Book>,val viewmodel:HomeViewModel) : RecyclerView.Adapter<BookViewholder>() {
+
+class BooksAdapter : RecyclerView.Adapter<BookViewholder>() {
+
+    lateinit var listener: DeleteListener
+    private val listBooks: MutableList<Book> = mutableListOf()
+
+    fun setDeleteListener(listener: DeleteListener) {
+        this.listener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewholder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemBinding: ItemBookBinding = ItemBookBinding.inflate(layoutInflater, parent, false)
-        return BookViewholder(itemBinding)
+        if (!::listener.isInitialized) {
+            throw RuntimeException("DeleteListener needs to be set on BooksAdapter")
+        }
+        return BookViewholder(itemBinding, listener)
     }
 
     override fun getItemCount(): Int {
@@ -24,16 +33,36 @@ class BooksAdapter(var listBooks: ArrayList<Book>,val viewmodel:HomeViewModel) :
     }
 
     override fun onBindViewHolder(holder: BookViewholder, position: Int) {
-        Log.i("ADAPTER", "" + position)
-        listBooks[position].let { holder.setData(it, viewmodel, position) }
+        listBooks[position].let { holder.setData(it) }
     }
 
     fun setData(newData: List<Book>) {
-        Log.i("ADAPTER", "diffUtils")
-            val postDiffCallback = BookDiffCallback(listBooks, newData)
-            val diffResult = DiffUtil.calculateDiff(postDiffCallback)
-            listBooks.clear()
-            listBooks.addAll(newData)
-            diffResult.dispatchUpdatesTo(this)
+        val postDiffCallback = BookDiffCallback(listBooks, newData)
+        val diffResult = DiffUtil.calculateDiff(postDiffCallback)
+        listBooks.clear()
+        listBooks.addAll(newData)
+        diffResult.dispatchUpdatesTo(this)
     }
+
+    fun delete(book: Book) {
+        val position = listBooks.indexOf(book)
+        if (position != -1) {
+            listBooks.remove(book)
+            notifyItemRemoved(position)
+        }
+    }
+}
+
+
+class BookViewholder(
+    private val bindingview: ItemBookBinding,
+    private val listener: DeleteListener
+) :
+    RecyclerView.ViewHolder(bindingview.root) {
+
+    fun setData(book: Book) {
+        bindingview.book = book
+        bindingview.deleteCallback = listener
+    }
+
 }

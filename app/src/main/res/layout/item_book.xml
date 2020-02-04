@@ -14,8 +14,8 @@
             type="Integer" />
 
         <variable
-            name="viewmodel"
-            type="com.spm.androidtesting.account.viewmodel.HomeViewModel" />
+            name="deleteCallback"
+            type="com.spm.androidtesting.controller.DeleteListener" />
 
         <variable
             name="book"
@@ -117,7 +117,7 @@
                 android:id="@+id/imageviewDelete"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:onClick="@{() -> viewmodel.removeItem(position)}"
+                android:onClick="@{() -> deleteCallback!= null ? deleteCallback.delete(book) : null}"
                 bind:layout_constraintBottom_toBottomOf="parent"
                 app:srcCompat="@android:drawable/ic_menu_delete"
                 bind:layout_constraintEnd_toEndOf="@+id/tvBookAuther"
