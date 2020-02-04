@@ -42,14 +42,24 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel(), L
 
     }
 
-
     fun getBooks() {
+        Log.i("ADAPTER", "getBooks")
+
+        /*
+        MainScope().launch {
+            try {
+                val list =  homeRepository.getBooksList()
+                bookadapter.setData(list)
+                progressVisibility.set(false)
+            } catch (exception: Exception) {
+                // Use try-catch or CoroutinesExceptionHandler to handle exceptions.
+            }
+        }
+        */
+
         homeRepository.getBooksList().observeForever {
             Log.i("TAG", "value ")
-            Log.i("asdas", it?.toString())
-            bookList.clear()
-            bookList.addAll(it)
-            bookadapter.notifyDataSetChanged()
+            bookadapter.setData(it!!)
             progressVisibility.set(false)
         }
     }
@@ -57,10 +67,9 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel(), L
     fun removeItem(position: Int) {
         if (bookList.size > 0) {
             bookList.removeAt(position)
-            bookadapter.notifyItemRemoved(position)
         }
+        bookadapter.setData(bookList)
     }
-
 
     fun cancelRequests() = coroutineContext.cancel()
 }

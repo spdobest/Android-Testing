@@ -9,27 +9,15 @@
 
         <variable
             name="viewmodel"
-            type="com.spm.androidtesting.account.viewmodel.HomeViewModel" />
+            type="com.spm.androidtesting.ui.viewmodel.UserViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="10dp"
         tools:context=".account.LoginTestFragment">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:adapter="@{viewmodel.bookadapter}"
-            android:orientation="vertical"
-            android:padding="10dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_book" />
-
 
         <ProgressBar
             android:id="@+id/progressbar"
@@ -38,20 +26,12 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:padding="5dp"
-            android:visibility="@{viewmodel.progressVisibility ? View.VISIBLE : View.GONE}"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnUserFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="User"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

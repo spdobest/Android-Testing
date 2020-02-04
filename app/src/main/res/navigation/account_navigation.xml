@@ -53,6 +53,18 @@
         <argument
             android:name="userid"
             app:argType="string" />
+        <action
+            android:id="@+id/action_homeFragment_to_userFragment"
+            app:destination="@id/userTestFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userTestFragment"
+        android:name="com.spm.androidtesting.ui.fragment.UserTestFragment"
+        android:label="HomeTestFragment">
+        <argument
+            android:name="userid"
+            app:argType="string" />
     </fragment>
 
 </navigation>

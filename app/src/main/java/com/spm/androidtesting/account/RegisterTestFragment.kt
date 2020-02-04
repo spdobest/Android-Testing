@@ -1,6 +1,7 @@
 package com.spm.androidtesting.account
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ class RegisterTestFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i(TAG, "onCreate")
         arguments?.let {
 
         }
@@ -36,7 +38,7 @@ class RegisterTestFragment : Fragment() {
         // Inflate the layout for this fragment
         //  return inflater.inflate(R.layout.fragment_register_test, container, false)
 
-
+        Log.i(TAG, "onCreateView")
         var binding: FragmentRegisterTestBinding =
             DataBindingUtil.inflate(
                 inflater,
@@ -60,7 +62,7 @@ class RegisterTestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.i(TAG, "onViewCreated")
         btnLogin?.setOnClickListener {
             NavHostFragment.findNavController(this).navigate(R.id.loginTestFragment, null)
         }
@@ -70,16 +72,45 @@ class RegisterTestFragment : Fragment() {
         }
     }
 
-
     companion object {
+        val TAG = RegisterTestFragment::class.java.simpleName
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
             RegisterTestFragment().apply {
                 arguments = Bundle().apply {
-                    //                    putString(ARG_PARAM1, param1)
 //                    putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i(TAG, "onResume()")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i(TAG, "onPause()")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i(TAG, "onStop()")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.i(TAG, "onStart()")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.i(TAG, "onDestroyView()")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i(TAG, "onDestroy()")
     }
 }

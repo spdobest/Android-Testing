@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import com.spm.androidtesting.R
 import com.spm.androidtesting.account.viewmodel.HomeViewModel
 import com.spm.androidtesting.databinding.FragmentHomeTestBinding
+import kotlinx.android.synthetic.main.fragment_home_test.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeTestFragment : Fragment() {
@@ -36,14 +38,21 @@ class HomeTestFragment : Fragment() {
             )
 
         binding.viewmodel = homeViewModel
-
         lifecycle.addObserver(homeViewModel)
-
-        homeViewModel.getBooks()
+        if (homeViewModel.bookList.size <= 0) {
+            homeViewModel.getBooks()
+        }
 
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        btnUserFragment?.setOnClickListener {
+            NavHostFragment.findNavController(this).navigate(R.id.userTestFragment, null)
+        }
+    }
 
     companion object {
         // TODO: Rename and change types and number of parameters
