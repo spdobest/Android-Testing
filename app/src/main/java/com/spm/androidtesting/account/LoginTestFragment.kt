@@ -81,7 +81,7 @@ class LoginTestFragment : Fragment() {
         val TAG = LoginTestFragment::class.java.simpleName
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(/*param1: String, param2: String*/) =
             LoginTestFragment().apply {
                 arguments = Bundle().apply {}
             }
