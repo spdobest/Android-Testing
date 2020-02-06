@@ -7,13 +7,13 @@
 
         <variable
             name="viewmodel"
-            type="com.spm.androidtesting.account.viewmodel.LoginViewModel" />
+            type="com.spm.androidtesting.account.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".account.LoginTestFragment">
+        tools:context=".account.login.LoginTestFragment">
 
 
         <Button

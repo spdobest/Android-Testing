@@ -1,4 +1,4 @@
-package com.spm.androidtesting.account
+package com.spm.androidtesting.account.login
 
 import android.os.Bundle
 import android.util.Log
@@ -9,23 +9,29 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.spm.androidtesting.R
-import com.spm.androidtesting.account.viewmodel.RegisterViewModel
-import com.spm.androidtesting.databinding.FragmentRegisterTestBinding
-import kotlinx.android.synthetic.main.fragment_register_test.*
+import com.spm.androidtesting.databinding.FragmentLoginTestBinding
+import com.spm.androidtesting.utils.ExamplePreferences
+import kotlinx.android.synthetic.main.fragment_login_test.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.dsl.module
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 
-val registerFragmentModule = module {
-    factory { RegisterTestFragment() }
-}
+class LoginTestFragment : Fragment() {
 
-class RegisterTestFragment : Fragment() {
 
-    private val registerViewModel: RegisterViewModel by viewModel()
+    private val preferences: ExamplePreferences by inject()
+
+    private val loginViewModel: LoginViewModel by viewModel()
+
+    /* val loginViewModel: LoginViewModel by lazy {
+         ViewModelProvider(this).get(LoginViewModel::class.java)
+     }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        loadKoinModules(loginModule)
         super.onCreate(savedInstanceState)
-        Log.i(TAG, "onCreate")
+        Log.i(TAG, "OnCreate()")
         arguments?.let {
 
         }
@@ -36,51 +42,45 @@ class RegisterTestFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        //  return inflater.inflate(R.layout.fragment_register_test, container, false)
+        //  return inflater.inflate(R.layout.fragment_login_test, container, false)
 
-        Log.i(TAG, "onCreateView")
-        var binding: FragmentRegisterTestBinding =
+        Log.i(TAG, "onCreateView()")
+
+        val binding: FragmentLoginTestBinding =
             DataBindingUtil.inflate(
                 inflater,
-                R.layout.fragment_register_test,
+                R.layout.fragment_login_test,
                 container,
                 false
             )
 
-        binding.viewmodel = registerViewModel
+        binding.viewmodel = loginViewModel
         binding.fragment = this
 
-        lifecycle.addObserver(registerViewModel)
+        lifecycle.addObserver(loginViewModel)
 
         return binding.root
-
     }
 
-    fun onLoginClicked() {
-        NavHostFragment.findNavController(this).navigate(R.id.loginTestFragment, null)
+    fun onRegisterClicked() {
+        NavHostFragment.findNavController(this).navigate(R.id.registerTestFragment, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.i(TAG, "onViewCreated")
         btnLogin?.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.loginTestFragment, null)
-        }
-
-        btnRegister?.setOnClickListener {
             NavHostFragment.findNavController(this).navigate(R.id.homeTestFragment, null)
         }
+        Log.i(TAG, "onViewCreated()")
     }
 
     companion object {
-        val TAG = RegisterTestFragment::class.java.simpleName
+        val TAG = LoginTestFragment::class.java.simpleName
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance() =
-            RegisterTestFragment().apply {
-                arguments = Bundle().apply {
-//                    putString(ARG_PARAM2, param2)
-                }
+        fun newInstance(/*param1: String, param2: String*/) =
+            LoginTestFragment().apply {
+                arguments = Bundle().apply {}
             }
     }
 
@@ -110,6 +110,7 @@ class RegisterTestFragment : Fragment() {
     }
 
     override fun onDestroy() {
+        unloadKoinModules(loginModule)
         super.onDestroy()
         Log.i(TAG, "onDestroy()")
     }

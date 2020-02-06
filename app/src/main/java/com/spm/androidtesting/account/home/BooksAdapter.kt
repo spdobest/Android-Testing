@@ -1,4 +1,4 @@
-package com.spm.androidtesting.adapter
+package com.spm.androidtesting.account.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.spm.androidtesting.account.viewmodel
+package com.spm.androidtesting.account.home
 
 import android.util.Log
 import androidx.databinding.ObservableBoolean
@@ -6,8 +6,6 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.spm.androidtesting.account.repository.HomeRepository
-import com.spm.androidtesting.adapter.BooksAdapter
 import com.spm.androidtesting.controller.DeleteListener
 import com.spm.androidtesting.model.books.Book
 

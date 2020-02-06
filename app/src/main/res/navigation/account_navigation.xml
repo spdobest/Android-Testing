@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/loginTestFragment"
-        android:name="com.spm.androidtesting.account.LoginTestFragment"
+        android:name="com.spm.androidtesting.account.login.LoginTestFragment"
         android:label="LoginTestFragment">
         <action
             android:id="@+id/action_loginTestFragment_to_registerTestFragment"
@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/registerTestFragment"
-        android:name="com.spm.androidtesting.account.RegisterTestFragment"
+        android:name="com.spm.androidtesting.account.register.RegisterTestFragment"
         android:label="RegisterTestFragment">
         <action
             android:id="@+id/action_registerTestFragment_to_loginTestFragment"
@@ -48,7 +48,7 @@
 
     <fragment
         android:id="@+id/homeTestFragment"
-        android:name="com.spm.androidtesting.account.HomeTestFragment"
+        android:name="com.spm.androidtesting.account.home.HomeTestFragment"
         android:label="HomeTestFragment">
         <argument
             android:name="userid"

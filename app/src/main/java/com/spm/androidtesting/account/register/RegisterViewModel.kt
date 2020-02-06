@@ -1,4 +1,4 @@
-package com.spm.androidtesting.account.viewmodel
+package com.spm.androidtesting.account.register
 
 import android.os.Handler
 import android.util.Log
@@ -14,47 +14,39 @@ import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.NavHostFragment
 import com.spm.androidtesting.R
-import com.spm.androidtesting.account.repository.LoginRepository
 import com.spm.androidtesting.utils.CommonUtils
-import org.koin.dsl.module
-
-val loginviewModel = module {
-    factory { LoginViewModel(get()) }
-}
-
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel(), LifecycleObserver,
-    Observable {
 
 
-    /**
-     * LifeCycle addresses the Android lifecycle problems in effective and easy ways. It has two main parts.
-     * LifecycleOwner exposes its state changes, and LifecycleObserver listens to these changes to make appropriate steps.
-     *
-    LiveData, on the other hand, leverages reactive programming which helps us manipulate data easily.
-    It shares some similarities with Stream in Java 8 and Observer(or Flowable) in RxJava. However,
-    LiveData has an advantage is that it is lifecycle-aware specific for Android. So, it works closely with LifeCycle components.
-     */
+class RegisterViewModel(private val registerRepository: RegisterRepository) : ViewModel(),
+    LifecycleObserver, Observable {
 
     var progressVisibility: ObservableBoolean = ObservableBoolean()
 
     @Bindable
-    var emailStr = ObservableField<String>()
+    var emailObservable = ObservableField<String>()
 
     @Bindable
-    var passwordStr = ObservableField<String>()
+    var passwordObservable = ObservableField<String>()
 
     @Bindable
-    var emailError = ObservableField<String>("")
+    var nameObservable = ObservableField<String>()
 
     @Bindable
-    var passwordError = ObservableField<String>("")
+    var mobileObservable = ObservableField<String>()
+
+    var emailError = ObservableField<String>()
+    var passwordError = ObservableField<String>()
+    var nameError = ObservableField<String>()
+    var mobileError = ObservableField<String>()
 
     var email: String = ""
     var password: String = ""
+    var name: String = ""
+    var mobile: String = ""
 
     fun setEmail_Id(email: String) {
         this.email = email
-        emailStr.set(email)
+        emailObservable.set(email)
     }
 
     fun getEmail_Id(): String {
@@ -63,14 +55,33 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     fun setPwd(pwd: String) {
         this.password = pwd
-        passwordStr.set(pwd)
+        passwordObservable.set(pwd)
     }
 
     fun getPwd(): String {
         return password
     }
 
-    fun onLoginClicked(view: View, fragment: Fragment) {
+    fun setNameStr(name: String) {
+        this.name = name
+        emailObservable.set(name)
+    }
+
+    fun getNameStr(): String {
+        return name
+    }
+
+    fun setMobileStr(mobile: String) {
+        this.mobile = mobile
+        passwordObservable.set(mobile)
+    }
+
+    fun getMobileStr(): String {
+        return mobile
+    }
+
+    fun onRegisterClicked(view: View, fragment: Fragment) {
+
         progressVisibility.set(true)
 
         if (!CommonUtils.isValidEmail(email)) {
@@ -81,12 +92,21 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
             passwordError.set("Password can not be less than 6")
         }
 
-        NavHostFragment.findNavController(fragment).navigate(R.id.homeTestFragment, null)
+        if (name.length < 3) {
+            nameObservable.set("Name Must be more than 3 character")
+        }
+
+        if (mobile.length != 10) {
+            mobileObservable.set("Mobile number must be 10 digits")
+        }
 
         Handler().postDelayed({
             progressVisibility.set(false)
+            NavHostFragment.findNavController(fragment).navigate(R.id.homeTestFragment, null)
         }, 3000)
+
     }
+
 
     fun onTextChangedEmail(
         s: CharSequence,
@@ -105,6 +125,16 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     ) {
         Log.w("tag", "onTextChanged $s")
     }
+
+    /*@BindingAdapter("app:error")
+    fun onError(edittext: AppCompatEditText, error: String) {
+        edittext.error = error
+    }
+
+    @BindingAdapter("app:focusChange")
+    fun onFocusChange(edittext: AppCompatEditText) {
+        edittext.onFocusChangeListener
+    }*/
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun getData() {

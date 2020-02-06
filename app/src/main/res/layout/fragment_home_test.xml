@@ -9,13 +9,13 @@
 
         <variable
             name="viewmodel"
-            type="com.spm.androidtesting.account.viewmodel.HomeViewModel" />
+            type="com.spm.androidtesting.account.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".account.LoginTestFragment">
+        tools:context=".account.login.LoginTestFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/booksListView"

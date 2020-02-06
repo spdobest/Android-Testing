@@ -9,18 +9,18 @@
 
         <variable
             name="viewmodel"
-            type="com.spm.androidtesting.account.viewmodel.RegisterViewModel" />
+            type="com.spm.androidtesting.account.register.RegisterViewModel" />
 
         <variable
             name="fragment"
-            type="com.spm.androidtesting.account.RegisterTestFragment" />
+            type="com.spm.androidtesting.account.register.RegisterTestFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp"
-        tools:context=".account.LoginTestFragment">
+        tools:context=".account.login.LoginTestFragment">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etName"

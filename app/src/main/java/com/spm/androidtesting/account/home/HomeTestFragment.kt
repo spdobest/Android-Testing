@@ -1,4 +1,4 @@
-package com.spm.androidtesting.account
+package com.spm.androidtesting.account.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,25 +8,33 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.spm.androidtesting.R
-import com.spm.androidtesting.account.viewmodel.HomeViewModel
-import com.spm.androidtesting.adapter.BooksAdapter
 import com.spm.androidtesting.databinding.FragmentHomeTestBinding
 import kotlinx.android.synthetic.main.fragment_home_test.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 
 class HomeTestFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModel()
 
-    val bookadapter: BooksAdapter by inject()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        loadKoinModules(homeModule)
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onDestroy() {
+        unloadKoinModules(homeModule)
+        super.onDestroy()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        var binding: FragmentHomeTestBinding =
+
+        val binding: FragmentHomeTestBinding =
             DataBindingUtil.inflate(
                 inflater,
                 R.layout.fragment_home_test,
@@ -35,7 +43,7 @@ class HomeTestFragment : Fragment() {
             )
 
         binding.viewmodel = homeViewModel
-        binding.booksListView.adapter = bookadapter
+        binding.booksListView.adapter = homeViewModel.bookAdapter
 
         lifecycle.addObserver(homeViewModel)
         /*    if (homeViewModel.bookList.size <= 0) {

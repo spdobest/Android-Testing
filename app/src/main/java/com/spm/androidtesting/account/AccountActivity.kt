@@ -6,18 +6,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import com.spm.androidtesting.R
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 
 
 class AccountActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        loadKoinModules(accountModule)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account)
     }
 
-    public override fun onStart() {
-        super.onStart()
+    override fun onDestroy() {
+        unloadKoinModules(accountModule)
+        super.onDestroy()
     }
 
 
