@@ -107,4 +107,5 @@ dependencies {
 //    kapt "com.android.databinding:compiler:$android_plugin_version"
     //AndroidX
     implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 }
