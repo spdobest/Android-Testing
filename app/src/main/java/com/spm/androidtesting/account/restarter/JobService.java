@@ -17,12 +17,15 @@ public class JobService extends android.app.job.JobService {
     private static RestartServiceBroadcastReceiver restartSensorServiceReceiver;
     private static JobService instance;
     private static JobParameters jobParameters;
+    private static Intent serviceIntent = null;
 
     /**
      * called when the tracker is stopped for whatever reason
      *
      * @param context
      */
+
+
     public static void stopJob(Context context) {
         if (instance != null && jobParameters != null) {
             try {
@@ -36,9 +39,13 @@ public class JobService extends android.app.job.JobService {
     }
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+    }
+
+    @Override
     public boolean onStartJob(JobParameters jobParameters) {
-        ProcessMainClass bck = new ProcessMainClass();
-        bck.launchService(this);
+        Service.launchService(this);
         registerRestarterReceiver();
         instance = this;
         JobService.jobParameters = jobParameters;

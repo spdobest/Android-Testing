@@ -53,7 +53,7 @@ public class RestartServiceBroadcastReceiver extends BroadcastReceiver {
         JobInfo jobInfo = new JobInfo.Builder(1, componentName)
                 // setOverrideDeadline runs it immediately - you must have at least one constraint
                 // https://stackoverflow.com/questions/51064731/firing-jobservice-without-constraints
-                .setOverrideDeadline(0)
+                .setOverrideDeadline(0)// time delay to start the ser
                 .setPersisted(true).build();
         jobScheduler.schedule(jobInfo);
     }
@@ -74,8 +74,7 @@ public class RestartServiceBroadcastReceiver extends BroadcastReceiver {
         } else {
             Log.i(TAG, "onRecieve");
             registerRestarterReceiver(context);
-            ProcessMainClass bck = new ProcessMainClass();
-            bck.launchService(context);
+            Service.launchService(context);
         }
         context.startActivity(new Intent(context, NextActivity.class));
     }

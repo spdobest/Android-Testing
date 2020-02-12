@@ -1,5 +1,6 @@
 package com.spm.androidtesting.account.restarter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
@@ -33,17 +34,45 @@ public class Service extends android.app.Service {
         return mCurrentService;
     }
 
+    private static Intent serviceIntent = null;
     public static void setmCurrentService(Service mCurrentService) {
         Service.mCurrentService = mCurrentService;
+    }
+
+    public static void launchService(Context context) {
+        if (context == null) {
+            return;
+        }
+        // setServiceIntent(context);
+
+        serviceIntent = new Intent(context, Service.class);
+
+        // depending on the version of Android we eitehr launch the simple service (version<O)
+        // or we start a foreground service
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(serviceIntent);
+        } else {
+            context.startService(serviceIntent);
+        }
+        Log.d(TAG, "ProcessMainClass: start service go!!!!");
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        setServiceIntent(this.getApplicationContext());
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             restartForeground();
         }
         mCurrentService = this;
+    }
+
+    private void setServiceIntent(Context context) {
+        if (serviceIntent == null) {
+            serviceIntent = new Intent(context, Service.class);
+        }
     }
 
     @Override
@@ -54,8 +83,7 @@ public class Service extends android.app.Service {
 
         // it has been killed by Android and now it is restarted. We must make sure to have reinitialised everything
         if (intent == null) {
-            ProcessMainClass bck = new ProcessMainClass();
-            bck.launchService(this);
+            launchService(this);
         }
 
         // make sure you call the startForeground on onStartCommand because otherwise
