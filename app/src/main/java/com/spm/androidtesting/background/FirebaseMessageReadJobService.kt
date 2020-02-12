@@ -24,7 +24,7 @@ class FirebaseMessageReadJobService : JobService() {
         }
 
 
-        startTimer()
+        // startTimer()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(
@@ -51,17 +51,19 @@ class FirebaseMessageReadJobService : JobService() {
             FirebaseMessageReadJobService::class.java
         )
         //  86400000     =         24 HOUR
-//  900000       =         15 Minute
-//  60000       =         1 Minute
+        //  900000       =         15 Minute
+        //  60000        =         1 Minute
         val jobInfo: JobInfo
         jobInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             JobInfo.Builder(JOB_ID, componentName)
                 .setBackoffCriteria(
                     6000,
                     JobInfo.BACKOFF_POLICY_LINEAR
-                ) //    .setOverrideDeadline(300)
-//    .setMinimumLatency(60000)
-                .setPeriodic(60000) //                    .setExtras(bundle)
+                )
+                //    .setOverrideDeadline(300)
+                //    .setMinimumLatency(60000)
+                .setPeriodic(60000)
+                //    .setExtras(bundle)
                 .build()
         } else {
             JobInfo.Builder(JOB_ID, componentName)
