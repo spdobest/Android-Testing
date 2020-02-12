@@ -9,12 +9,23 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
+import java.util.*
 
 class FirebaseMessageReadJobService : JobService() {
+
+    lateinit var timer: Timer
+    lateinit var timerTask: TimerTask
+    var oldTime: Long = 0
+    private var counter = 0
+
     override fun onStartJob(jobParameters: JobParameters): Boolean { //Reschedule the Service before calling job finished
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             scheduleRefreshForNaught(applicationContext)
         }
+
+
+        startTimer()
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(
                 Intent(
@@ -104,5 +115,40 @@ class FirebaseMessageReadJobService : JobService() {
         private const val JOB_ID = 1001
         private const val REFRESH_INTERVAL = 5 * 1000 // 5 seconds
             .toLong()
+    }
+
+    fun initializeTimerTask() {
+        Log.i(
+            "Service.TAG",
+            "initialising TimerTask"
+        )
+        timerTask =
+            object : TimerTask() {
+                override fun run() {
+                    Log.i("in timer", "in timer ++++  " + counter++)
+                }
+            }
+    }
+
+    fun startTimer() {
+        Log.i("Service.TAG", "Starting timer")
+        //set a new Timer - if one is already running, cancel it to avoid two running at the same time
+        stoptimertask()
+        timer = Timer()
+        //initialize the TimerTask's job
+        initializeTimerTask()
+        Log.i("Service.TAG", "Scheduling...")
+        //schedule the timer, to wake up every 1 second
+        timer.schedule(
+            timerTask,
+            1000,
+            1000
+        ) //
+    }
+
+    fun stoptimertask() { //stop the timer, if it's not already null
+        if (timer != null) {
+            timer.cancel()
+        }
     }
 }

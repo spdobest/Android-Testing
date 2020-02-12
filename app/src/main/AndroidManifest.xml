@@ -34,6 +34,10 @@
         </activity>
         <activity android:name=".MainActivity" />
 
+        <service
+            android:name=".background.FirebaseMessageReadJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <service
             android:name=".account.restarter.JobService"
@@ -56,7 +60,6 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-                <action android:name="uk.ac.shef.oak.activity_recognition.sensor_service.RestartSensor" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

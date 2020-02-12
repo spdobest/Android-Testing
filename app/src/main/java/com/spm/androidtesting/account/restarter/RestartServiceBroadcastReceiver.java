@@ -76,7 +76,9 @@ public class RestartServiceBroadcastReceiver extends BroadcastReceiver {
             registerRestarterReceiver(context);
             Service.launchService(context);
         }
-        context.startActivity(new Intent(context, NextActivity.class));
+        Intent intent1 = new Intent(context, NextActivity.class);
+        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent1);
     }
 
     private void registerRestarterReceiver(final Context context) {
