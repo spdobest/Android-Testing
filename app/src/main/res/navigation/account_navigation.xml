@@ -60,7 +60,7 @@
 
     <fragment
         android:id="@+id/userTestFragment"
-        android:name="com.spm.androidtesting.ui.fragment.UserTestFragment"
+        android:name="com.spm.androidtesting.ui.fragment.TabContainerFragment"
         android:label="HomeTestFragment">
         <argument
             android:name="userid"

@@ -1,6 +1,7 @@
 package com.spm.androidtesting.account.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,13 +20,21 @@ class HomeTestFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i(TAG, "onCreate")
         loadKoinModules(homeModule)
         super.onCreate(savedInstanceState)
+        Log.i(TAG, "")
     }
 
     override fun onDestroy() {
         unloadKoinModules(homeModule)
         super.onDestroy()
+        Log.i(TAG, "onDestroy")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.i(TAG, "onStart")
     }
 
     override fun onCreateView(
@@ -33,6 +42,7 @@ class HomeTestFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        Log.i(TAG, "onCreateView")
 
         val binding: FragmentHomeTestBinding =
             DataBindingUtil.inflate(
@@ -53,9 +63,24 @@ class HomeTestFragment : Fragment() {
         return binding.root
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.i(TAG, "onPause")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.i(TAG, "onDetach")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.i(TAG, "onDestroyView")
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.i(TAG, "onViewCreated")
         //  bookadapter.setDeleteListener(homeViewModel)
 
         /* homeViewModel.getAllBooks().observe(viewLifecycleOwner, Observer {
@@ -73,6 +98,7 @@ class HomeTestFragment : Fragment() {
     }
 
     companion object {
+        val TAG = HomeTestFragment::class.java.simpleName
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(/*param1: String, param2: String*/) =

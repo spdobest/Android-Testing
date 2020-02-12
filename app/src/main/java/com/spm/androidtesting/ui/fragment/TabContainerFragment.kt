@@ -8,12 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import com.google.android.material.tabs.TabLayoutMediator
 import com.spm.androidtesting.R
-import com.spm.androidtesting.databinding.FragmentUserTestBinding
+import com.spm.androidtesting.databinding.FragmentTabcontainerBinding
+import com.spm.androidtesting.ui.adapter.ViewpagerStateAdapter
 import com.spm.androidtesting.ui.viewmodel.UserViewModel
+import kotlinx.android.synthetic.main.fragment_tabcontainer.*
 
 
-class UserTestFragment : Fragment() {
+class TabContainerFragment : Fragment() {
 
     val userViewmodel: UserViewModel = UserViewModel()
 
@@ -31,10 +35,10 @@ class UserTestFragment : Fragment() {
     ): View? {
 
 
-        var binding: FragmentUserTestBinding =
+        var binding: FragmentTabcontainerBinding =
             DataBindingUtil.inflate(
                 inflater,
-                R.layout.fragment_user_test,
+                R.layout.fragment_tabcontainer,
                 container,
                 false
             )
@@ -48,19 +52,44 @@ class UserTestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setupViewPager()
         Log.i(TAG, "onViewCreated()")
     }
 
     companion object {
-        val TAG = UserTestFragment::class.java.simpleName
+        val TAG = TabContainerFragment::class.java.simpleName
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            UserTestFragment().apply {
+            TabContainerFragment().apply {
                 arguments = Bundle().apply {}
             }
     }
+
+    private fun setupViewPager() {
+        val listFragment = ArrayList<Fragment>()
+        val tabsArray = activity?.resources?.getStringArray(R.array.arr)
+
+        val fragmentChat = FirstTabFragment.newInstance("", "")
+        val fragmentUser = SecondTabFragment.newInstance("", "")
+        val fragmentNews = ThirdTabFragment.newInstance("", "")
+
+        listFragment.add(fragmentChat)
+        listFragment.add(fragmentUser)
+        listFragment.add(fragmentNews)
+
+        val adapter = ViewpagerStateAdapter(listFragment, activity as FragmentActivity)
+        viewpagerHome.adapter = adapter
+
+        TabLayoutMediator(
+            tabLayoutHome,
+            viewpagerHome,
+            TabLayoutMediator.TabConfigurationStrategy { tab, position ->
+                // Styling each tab here
+                tabsArray?.let { tab.setText(tabsArray[position]) }
+            }).attach()
+    }
+
 
     override fun onResume() {
         super.onResume()

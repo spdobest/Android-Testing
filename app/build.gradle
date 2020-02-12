@@ -101,7 +101,9 @@ dependencies {
     implementation "org.koin:koin-android:2.0.1"
     // image loading
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation "com.google.android.material:material:1.2.0-alpha04"
 //    kapt "com.android.databinding:compiler:$android_plugin_version"
     //AndroidX
     implementation "androidx.cardview:cardview:1.0.0"

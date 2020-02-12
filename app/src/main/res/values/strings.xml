@@ -8,4 +8,10 @@
     <string name="any_api_sites">https://any-api.com/</string>
     <string name="api_key">y5nWAAK3Ou4OgGu5VZy4rhrQi4TTeluR</string>
     <string name="blankstr"></string>
+
+    <string-array name="arr">
+        <item>First</item>
+        <item>Second</item>
+        <item>Third</item>
+    </string-array>
 </resources>
