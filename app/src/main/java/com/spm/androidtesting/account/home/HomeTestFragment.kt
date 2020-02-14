@@ -1,5 +1,6 @@
 package com.spm.androidtesting.account.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import com.spm.androidtesting.HomeActivity
 import com.spm.androidtesting.R
 import com.spm.androidtesting.databinding.FragmentHomeTestBinding
 import kotlinx.android.synthetic.main.fragment_home_test.*
@@ -93,7 +95,12 @@ class HomeTestFragment : Fragment() {
          })*/
 
         btnUserFragment?.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.userTestFragment, null)
+
+            activity?.let {
+                it.startActivity(Intent(activity,HomeActivity::class.java))
+            }
+
+           // NavHostFragment.findNavController(this).navigate(R.id.userTestFragment, null)
         }
     }
 

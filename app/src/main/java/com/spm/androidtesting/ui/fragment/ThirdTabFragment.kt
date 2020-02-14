@@ -20,18 +20,13 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.dsl.module
 
-private val thirdTabModule = module {
-    TabViewModel()
-}
-
 class ThirdTabFragment : Fragment() {
 
-    val userViewmodel: TabViewModel = TabViewModel()
 
     val examplePreferences: ExamplePreferences by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        loadKoinModules(thirdTabModule)
+
         super.onCreate(savedInstanceState)
         Log.i(TAG, "OnCreate()")
         arguments?.let {
@@ -53,9 +48,9 @@ class ThirdTabFragment : Fragment() {
                 false
             )
 
-        binding.viewmodel = userViewmodel
-
-        lifecycle.addObserver(userViewmodel)
+//        binding.viewmodel = userViewmodel
+//
+//        lifecycle.addObserver(userViewmodel)
 
         return binding.root
     }
@@ -101,7 +96,6 @@ class ThirdTabFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        unloadKoinModules(thirdTabModule)
         super.onDestroyView()
         Log.i(TAG, "onDestroyView()")
     }

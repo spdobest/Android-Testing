@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/account_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.spm.androidtesting.ui.fragment.TabContainerFragment"
+        android:label="containerTabFragment"
+        tools:layout="@layout/fragment_onboarding_test">
+        <action
+            android:id="@+id/action_homeTestFragment_to_registerTestFragment2"
+            app:destination="@id/registerTestFragment" />
+        <action
+            android:id="@+id/action_homeTestFragment_to_loginTestFragment"
+            app:destination="@id/loginTestFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+
+</navigation>

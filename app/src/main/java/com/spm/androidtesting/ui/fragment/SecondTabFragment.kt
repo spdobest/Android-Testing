@@ -19,13 +19,10 @@ import org.koin.android.ext.android.inject
 import org.koin.core.context.unloadKoinModules
 import org.koin.dsl.module
 
-val secondTabModule = module {
-    TabViewModel()
-}
 
 class SecondTabFragment : Fragment() {
     val examplePreferences: ExamplePreferences by inject()
-    val userViewmodel: TabViewModel = TabViewModel()
+  //  val userViewmodel: TabViewModel = TabViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +46,9 @@ class SecondTabFragment : Fragment() {
                 false
             )
 
-        binding.viewmodel = userViewmodel
-
-        lifecycle.addObserver(userViewmodel)
+//        binding.viewmodel = userViewmodel
+//
+//        lifecycle.addObserver(userViewmodel)
 
         return binding.root
     }
@@ -98,7 +95,7 @@ class SecondTabFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        unloadKoinModules(secondTabModule)
+     //   unloadKoinModules(secondTabModule)
         super.onDestroyView()
         Log.i(TAG, "onDestroyView()")
     }

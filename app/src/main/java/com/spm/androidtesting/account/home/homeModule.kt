@@ -7,5 +7,4 @@ val homeModule = module {
     factory { BooksAdapter() }
     factory { HomeRepository(get()) }
     viewModel { HomeViewModel(get(), get()) }
-
 }

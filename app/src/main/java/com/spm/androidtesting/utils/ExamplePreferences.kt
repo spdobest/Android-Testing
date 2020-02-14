@@ -12,7 +12,5 @@ class ExamplePreferences(context: Context) {
         preferences.edit().putBoolean(showFragmentKey, shouldShow).apply()
     }
 
-    fun getShouldShowFragment() {
-        preferences.getBoolean(showFragmentKey, false)
-    }
+    fun getShouldShowFragment() =   preferences.getBoolean(showFragmentKey, false)
 }

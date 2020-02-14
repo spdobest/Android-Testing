@@ -19,7 +19,7 @@ class HomeViewModel(private val homeRepository: HomeRepository, val bookAdapter:
     init {
         progressVisibility.set(true)
         bookAdapter.setDeleteListener(this)
-        getAllBooks()
+       // getAllBooks()
     }
 
     fun delete(): LiveData<Book> = deleteBook
