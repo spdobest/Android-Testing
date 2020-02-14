@@ -10,11 +10,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.spm.androidtesting.R
-import com.spm.androidtesting.account.home.HomeRepository
-import com.spm.androidtesting.account.home.HomeViewModel
 import com.spm.androidtesting.databinding.FragmentTabBinding
 import com.spm.androidtesting.model.books.BooksResponse
-import com.spm.androidtesting.network.BookApiService
 import com.spm.androidtesting.ui.NextActivity
 import com.spm.androidtesting.ui.repository.FirstTabRepository
 import com.spm.androidtesting.ui.viewmodel.TabViewModel
@@ -23,17 +20,16 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_tab.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.context.GlobalContext.get
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.dsl.module
 
+// module(override=true)Ó
 val firstTabModule = module(override=true){
     single { FirstTabRepository(get()) }
     viewModel { TabViewModel(get()) }

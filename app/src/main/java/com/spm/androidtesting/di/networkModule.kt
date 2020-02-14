@@ -2,7 +2,6 @@ package com.spm.androidtesting.di
 
 import com.spm.androidtesting.BuildConfig
 import com.spm.androidtesting.network.AuthInterceptor
-import com.spm.androidtesting.ui.repository.FirstTabRepository
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
